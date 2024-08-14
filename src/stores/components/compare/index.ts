@@ -2,8 +2,9 @@ import { createContext } from "react";
 
 const initValue = {
   value: undefined as unknown,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setValue: (value: unknown) => {},
+  setValue: (value: unknown) => {
+    console.log(value);
+  },
 };
 
 const CompareBaseCtx = createContext<typeof initValue>(initValue);

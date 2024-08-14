@@ -1,5 +1,6 @@
 {
   "name": "admira",
+  "homepage": "https://rfajardo87.github.io/legendary-tribble/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "astro:dev": "astro dev"
+    "astro:dev": "astro dev",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build"
   },
   "dependencies": {
     "@astrojs/react": "^3.6.2",
@@ -23,6 +26,7 @@
     "chart.js": "^4.4.3",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "gh-pages": "^6.1.1",
     "msw": "^2.3.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
