@@ -13,5 +13,19 @@ Componente generico para definir y renderizar graficos dinamicos usando la herra
 -  data: any
 
 <AstroCard>
-    <Chart type="bar" data={{labels:[1,2],datasets:[{label:"test",data:[34,45]}]}}/>
+    <Chart type="bar" data={{
+    labels: [1,2],
+    datasets: [
+      {
+        label: "costo adquisicion",
+        type: "line",
+        data: [10,15]
+      },
+      {
+        type: "bar",
+        label: "valorDeVida",
+        data: [11,12]
+      }
+    ]
+  }}/>
 </AstroCard>
