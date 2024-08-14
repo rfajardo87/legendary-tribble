@@ -1,0 +1,29 @@
+---
+    title: Icon
+---
+
+import { Card as AstroCard } from '@astrojs/starlight/components';
+import { Icon } from '../../../../components/icon';
+
+Componente que permite mostrar iconos para ayudar de los usuarios.
+Toma los datos de la biblioteca **FontAwesome** en su version libre.
+
+### Propiedades
+- icon: string
+- brand: boolean
+- size: ICONSIZE
+- extraClass: string
+
+### Enumeracion
+- ICONSIZE
+    - XS2
+    - XS
+    - SM
+    - LG
+    - XL
+    - XL2
+
+### Ejemplo
+<AstroCard>
+    <Icon icon="house" />
+</AstroCard>

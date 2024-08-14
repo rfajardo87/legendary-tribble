@@ -1,0 +1,25 @@
+---
+    title: Compare
+---
+
+import { Card as AstroCard } from '@astrojs/starlight/components';
+import { Compare } from '../../../../components/compare';
+
+Componente que ayuda al usuario a comparar los diversos datos obtenidos para su análisis
+Puede seleccionar compara todos los datos para generar una garfica, 
+o puede seleccionar una opción base y una opcion de referencia para comparar.
+
+Al seleccionar una opcion base, el componente automaticamente desactiva la misma
+opcion en el grupo de referencia y viceversa; para que los datos de misma naturaleza
+no se comparen con ellos mismos.
+
+### Propiedades
+- children: Component
+- options: unknown[]
+
+### Ejemplo
+<AstroCard>
+    <Compare options={["option 1","option 2"]}>
+        contenido
+    </Compare>
+</AstroCard>

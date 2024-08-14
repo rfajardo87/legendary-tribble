@@ -1,0 +1,21 @@
+---
+    title: Container
+---
+
+import { Card as AstroCard } from '@astrojs/starlight/components';
+import { Container } from '../../../../components/container';
+
+Componente generico para contener y dar una estructura similar a todos los componentes visuales con los que el 
+usuario puede interactuar
+
+### Propiedades 
+- children: Component
+- extraClass: string
+
+### Ejemplo
+
+<AstroCard>
+    <Container extraClass="text-bg-white">
+        Simple content
+    </Container>
+</AstroCard>

@@ -1,0 +1,18 @@
+---
+    title: ErrorFetch
+---
+
+import { Card as AstroCard } from '@astrojs/starlight/components';
+import { ErrorFetch } from '../../../../components/error';
+
+Este componente permite visualizar un elemento **toast** que indica al usuario cuando un error ha ocurrido
+especialmenete a momento de intentar traer datos desde el servidor.
+
+### Propiedades
+- error: string
+- cb: Function
+
+### Ejemplo
+<AstroCard>
+    <ErrorFetch />        
+</AstroCard>

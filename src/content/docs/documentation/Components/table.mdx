@@ -1,0 +1,20 @@
+---
+    title: Table
+---
+
+import { Card as AstroCard } from '@astrojs/starlight/components';
+import { Table } from '../../../../components/table';
+
+Este componente permite desplegar información estructurada relacionada de manera organizada para que el usuario 
+pueda analizar la información de manera mas clara y cómoda
+
+### Propiedades
+- headers: string[]
+- data: GenericType[]
+
+
+### Ejemplo
+
+<AstroCard>
+    <Table headers={["col1","col2"]} data={[{col1:"val1",col2:"val2"},{col1:"val3",col2:"val4"}]} />        
+</AstroCard>
