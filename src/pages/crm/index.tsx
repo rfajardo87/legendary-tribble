@@ -6,8 +6,11 @@ import { data as mockData } from "../../mock/crm/data.json";
 import { useMock } from "../../hooks/useMock";
 import { DataHook } from "../../types/hooks";
 import { CrmData as CrmDataType } from "../../types/crm";
+import { useFlag } from "@unleash/proxy-client-react";
 
 const CrmData = () => {
+  const admira_server_flag = useFlag("admira_server");
+  console.log({ admira_server_flag });
   const {
     data: crmData,
     isLoading,
@@ -20,7 +23,7 @@ const CrmData = () => {
   const data = useMock<CrmDataType>(crmData as DataHook, mockData);
 
   return (
-    <CrmDataCtxProvider value={{ ...data }}>
+    <CrmDataCtxProvider value={{ ...(admira_server_flag ? data : mockData) }}>
       <View isLoading={isLoading} error={error} />
     </CrmDataCtxProvider>
   );

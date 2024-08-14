@@ -10,8 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "astro:dev": "astro dev",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@astrojs/react": "^3.6.2",
@@ -20,6 +20,7 @@
     "@popperjs/core": "^2.11.8",
     "@tanstack/react-table": "^8.20.1",
     "@types/uikit": "^3.14.5",
+    "@unleash/proxy-client-react": "^4.3.1",
     "astro": "^4.13.3",
     "axios": "^1.7.3",
     "bootstrap": "5.3.3",
@@ -34,6 +35,7 @@
     "sass": "^1.77.8",
     "sweetalert2": "^11.12.4",
     "uikit": "^3.21.9",
+    "unleash-proxy-client": "^3.5.2",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
