@@ -6,6 +6,7 @@ before_script:
   - npm install
 pages:
   script:
+    - echo 'export default "$CI_PANTRY";' > src/api/config.ts
     - npm run build
     - mv dist/* public
   artifacts:
