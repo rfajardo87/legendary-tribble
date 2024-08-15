@@ -23,7 +23,7 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
 
 environment-job:
-  image: node:lts-slim
+  image: node:current-alpine3.20
   stage: environment
   script:
     - echo "Job complete"
