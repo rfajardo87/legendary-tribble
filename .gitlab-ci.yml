@@ -17,19 +17,13 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 stages:          # List of stages for jobs, and their order of execution
-  - environment
   - build
   - test
   - deploy
 
-environment-job:
-  image: node:lts
-  stage: environment
-  script:
-    - echo "Job complete"
-
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
+  image: node:slim
   script:
     - echo "Compiling the code..."
     - npm install
