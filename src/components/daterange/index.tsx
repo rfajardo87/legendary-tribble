@@ -2,24 +2,21 @@ import { PropsWithChildren, useState } from "react";
 import { View } from "./view";
 import { isBefore } from "date-fns";
 
-interface Props extends PropsWithChildren {
-  filter: () => void;
-}
-
-const DateRange = ({ children, filter }: Props) => {
+const DateRange = ({ children }: PropsWithChildren) => {
   const [badRange, setBadRange] = useState(false);
 
-  const compareDates = (max: Date | string, min: Date | string) => {
-    if (isBefore(min, max)) {
+  const compareDates = (max: Date | string, min: Date | string): boolean => {
+    if (isBefore(max, min)) {
       setBadRange(true);
-      return;
+      return false;
     }
-    filter();
+    return true;
   };
+  
   return (
     <View
       children={children}
-      filter={compareDates}
+      compareDates={compareDates}
       badRange={badRange}
       setBadRange={setBadRange}
     />

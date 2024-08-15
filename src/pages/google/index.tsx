@@ -1,32 +1,17 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { format } from "date-fns";
 import { View } from "./view";
 import { Tabs } from "./enums/tabs";
 import { GoogleDataCtxProvider } from "../../stores/google/data";
 import { getAnalytics } from "../../api/google";
-import { useDateRange } from "../../stores/components/daterange";
-import { useMock } from "../../hooks/useMock";
-import { DataHook } from "../../types/hooks";
-import { GoogleProps } from "../../types/google/analytics";
-import { data as mockGoogle } from "../../mock/google/analytics.json";
 
 const GooglePage = () => {
   const [current, setCurrent] = useState(Tabs.Vistas);
-  const { min, max } = useDateRange();
 
-  const {
-    data: dataGoogle,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: "analytics",
-    queryFn: () =>
-      getAnalytics(format(min, "yyyy-MM-dd"), format(max, "yyyy-MM-dd")),
+    queryFn: getAnalytics,
   });
-
-  const data = useMock<GoogleProps>(dataGoogle as DataHook, mockGoogle);
 
   const innerTabs = [
     { name: "Vistas", type: Tabs.Vistas },
@@ -40,15 +25,12 @@ const GooglePage = () => {
   };
 
   return (
-    <GoogleDataCtxProvider value={{ data: { ...data }, current }}>
+    <GoogleDataCtxProvider value={{ ...data?.data, current }}>
       <View
         isLoading={isLoading}
         error={error}
         innerTabs={innerTabs}
         onClickAction={clickAction}
-        filter={() => {
-          refetch();
-        }}
       />
     </GoogleDataCtxProvider>
   );

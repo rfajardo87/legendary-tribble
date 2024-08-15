@@ -22,4 +22,4 @@ const useDateRange = create<DateRangeState>((set) => ({
   setMax: (max: maxMin) => set((state) => ({ ...state, max })),
 }));
 
-export { useDateRange };
+export { useDateRange, type maxMin };

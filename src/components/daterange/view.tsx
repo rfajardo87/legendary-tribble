@@ -1,18 +1,17 @@
 import { PropsWithChildren } from "react";
 import { format, toDate } from "date-fns";
 import clsx from "clsx";
-import { useDateRange } from "../../stores/components/daterange";
-import { Button } from "../button";
+import { maxMin, useDateRange } from "../../stores/components/daterange";
 import style from "./view.module.scss";
 import { ErrorFetch } from "../error";
 
 interface Props extends PropsWithChildren {
-  filter: (min: Date | string, max: Date | string) => void;
   badRange: boolean;
   setBadRange: (value: boolean) => void;
+  compareDates: (max: maxMin, min: maxMin) => boolean;
 }
 
-const View = ({ children, filter, badRange, setBadRange }: Props) => {
+const View = ({ children, badRange, setBadRange, compareDates }: Props) => {
   const { min, max, setMin, setMax } = useDateRange((state) => state);
   const formatString = "yyyy-MM-dd";
   return (
@@ -28,16 +27,25 @@ const View = ({ children, filter, badRange, setBadRange }: Props) => {
         <input
           type="date"
           value={format(min, formatString)}
-          onChange={(e) => setMin(toDate(e.currentTarget.value))}
+          onChange={(e) => {
+            const thisValue = toDate(e.currentTarget.value);
+            if (compareDates(max, thisValue)) {
+              setMin(toDate(e.currentTarget.value));
+            }
+          }}
           className={clsx(["uk-input"])}
         />
         <input
           type="date"
           value={format(max, formatString)}
-          onChange={(e) => setMax(toDate(e.currentTarget.value))}
+          onChange={(e) => {
+            const thisValue = e.currentTarget.value;
+            if (compareDates(thisValue, min)) {
+              setMax(toDate(e.currentTarget.value));
+            }
+          }}
           className={clsx(["uk-input"])}
         />
-        <Button onClick={() => filter(min, max)} icon="filter" />
       </div>
       {children}
       {badRange && (

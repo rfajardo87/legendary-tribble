@@ -13,7 +13,6 @@ type GoogleTypes = GoogleProps | GoogleAdsProps;
 interface Props extends APIProps<GoogleTypes> {
   innerTabs: InnerTabs[];
   onClickAction: (e: React.MouseEvent, tab: Tabs) => void;
-  filter?: () => void;
 }
 
 export type { Props };

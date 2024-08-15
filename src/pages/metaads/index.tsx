@@ -5,14 +5,10 @@ import { MetaAdsCtxProvider } from "../../stores/meta/ads";
 import { Compare } from "../../components/compare";
 import { Head } from "../../components/head";
 import { Icon } from "../../components/icon";
-import { useMock } from "../../hooks/useMock";
-import { data as mockMeta } from "../../mock/meta/meta.json";
-import { DataHook } from "../../types/hooks";
-import { MetaAds as MetaAdsType } from "../../types/meta";
 
 const MetaAds = () => {
   const {
-    data: metaData,
+    data,
     isLoading,
     error,
   } = useQuery({
@@ -20,7 +16,6 @@ const MetaAds = () => {
     queryFn: getAds,
   });
 
-  const data = useMock<MetaAdsType>(metaData as DataHook, mockMeta);
 
   return (
     <>
@@ -28,7 +23,7 @@ const MetaAds = () => {
         <Icon icon="meta" brand /> Meta Ads
       </Head>
       <Compare options={["Alcance", "Participacion", "Gasto", "Conversion"]}>
-        <MetaAdsCtxProvider value={{ ...data }}>
+        <MetaAdsCtxProvider value={{ ...data?.data }}>
           <View isLoading={isLoading} error={error} />
         </MetaAdsCtxProvider>
       </Compare>

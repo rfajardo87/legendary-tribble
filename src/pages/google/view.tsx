@@ -10,22 +10,23 @@ import { useContext } from "react";
 import { GoogleDataCtx } from "../../stores/google/data";
 import { ErrorFetch } from "../../components/error";
 import { Table } from "../../components/table";
-import { GenericType } from "../../types/components/generic";
-import { convertToDataTable } from "../../helpers/fns";
+import { convertToDataTable, isBetween } from "../../helpers/fns";
 import { Card } from "../../components/card";
 import style from "./view.module.scss";
 import { Head } from "../../components/head";
 import { Icon } from "../../components/icon";
 import { DateRange } from "../../components/daterange";
+import { useDateRange } from "../../stores/components/daterange";
 
 const View = ({
   isLoading,
   error,
   innerTabs,
   onClickAction,
-  filter,
 }: Props) => {
   const { current, data } = useContext(GoogleDataCtx);
+  const { min, max } = useDateRange();
+
   if (isLoading) {
     return <Spin />;
   }
@@ -40,15 +41,17 @@ const View = ({
 
   const currentData = () => {
     if (current === Tabs.Sessiones) {
-      const sesiones = data.sesiones.map((sesion) => ({
-        ...sesion,
-        tasaRebote: `${sesion.tasaRebote * 100} %`,
-      }));
+      const sesiones = data.sesiones
+        .filter((sesion) => isBetween(sesion.fecha, min, max, true))
+        .map((sesion) => ({
+          ...sesion,
+          tasaRebote: `${sesion.tasaRebote * 100} %`,
+        }));
       return (
-        <DateRange filter={() => filter && filter()}>
+        <DateRange>
           <Table
             headers={["Fecha", "Sesiones", "Tasa rebote"]}
-            data={sesiones as unknown as GenericType[]}
+            data={convertToDataTable(sesiones)}
           />
         </DateRange>
       );
@@ -58,11 +61,14 @@ const View = ({
       return <Demography />;
     }
 
+    const vistas = data.vistasPagina.filter((vista) =>
+      isBetween(vista.fecha, min, max, true)
+    );
     return (
-      <DateRange filter={() => filter && filter()}>
+      <DateRange>
         <Table
           headers={["Fecha", "Vistas"]}
-          data={convertToDataTable(data.vistasPagina)}
+          data={convertToDataTable(vistas)}
         />
       </DateRange>
     );

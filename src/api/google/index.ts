@@ -1,9 +1,6 @@
 import { googleAdsInstance, googleInstance } from "..";
 
-const getAnalytics = async (min: string, max: string) => {
-  const url = `/?minDate=${min}&maxDate=${max}`;
-  return await googleInstance.get(url);
-};
+const getAnalytics = async () => await googleInstance.get("/");
 
 const getAds = async () => await googleAdsInstance.get("/");
 
